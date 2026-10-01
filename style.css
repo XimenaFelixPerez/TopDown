@@ -1,0 +1,623 @@
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+}
+
+.numero {
+    font-family: "Roboto", sans-serif;
+    font-variant-numeric: tabular-nums;
+}
+
+.login-panel {
+    background: linear-gradient(160deg, #2b4bd6 0%, #1c2f66 100%);
+    color: #fff;
+}
+
+.login-form-side {
+    display: flex;
+    align-items: center;
+}
+
+.footer-text {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+:root {
+    --portal-color: #2b4bd6;
+    --ancho-barra-lateral: 260px;
+}
+
+.sidebar {
+    width: var(--ancho-barra-lateral);
+    height: 100vh;
+    border-right: 1px solid #ebebeb;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+.main-content {
+    background: #f7f8fa;
+    min-height: 100vh;
+    margin-left: var(--ancho-barra-lateral);
+    width: calc(100% - var(--ancho-barra-lateral));
+}
+
+.nav-pills .nav-link {
+    color: #555;
+    border-radius: 8px;
+}
+
+.nav-pills .nav-link.active {
+    background: #eaf0ff;
+    color: var(--portal-color);
+    font-weight: 600;
+}
+
+.color-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.color-dot.active {
+    border-color: #333;
+}
+
+.avatar-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--portal-color);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.notif-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--portal-color);
+}
+
+.card-stat {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    height: 100%;
+}
+
+.card-stat-highlight {
+    background: var(--portal-color);
+    color: #fff;
+    border: none;
+}
+
+.card-stat .stat-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    font-family: "Roboto", sans-serif;
+    font-variant-numeric: tabular-nums;
+    margin: 0.15rem 0;
+}
+
+.stat-link {
+    color: #fff;
+    text-decoration: underline;
+    font-size: 0.85rem;
+}
+
+.panel {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 1.1rem;
+}
+
+.dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.dot-active {
+    background: var(--portal-color);
+}
+
+.dot-muted {
+    background: #ccc;
+}
+
+.dot-light {
+    background: #cdd8ff;
+}
+
+.badge-new {
+    background: #eaf0ff;
+    color: var(--portal-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+}
+
+.event-date {
+    background: #eaf0ff;
+    color: var(--portal-color);
+    font-weight: 600;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    height: fit-content;
+    white-space: nowrap;
+}
+
+.btn-quick {
+    background: #f1f2f5;
+    border: none;
+    font-size: 0.85rem;
+    padding: 0.6rem 0.5rem;
+}
+
+.btn-quick:hover {
+    background: #cececd;
+}
+
+.kiosco-tabs {
+    border-bottom: 1px solid #eee;
+}
+
+.kiosco-tabs .nav-link {
+    border: none;
+    color: #888888;
+    padding: 0.5rem 0;
+    margin-right: 2rem;
+    border-radius: 0;
+}
+
+.kiosco-tabs .nav-link.active {
+    color: var(--portal-color);
+    border-bottom: 2px solid var(--portal-color);
+    background: transparent;
+    font-weight: 600;
+}
+
+.fila-resaltada {
+    background: #f7f8fa;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.tabla-limpia {
+    margin-bottom: 0;
+}
+
+.tabla-limpia thead th {
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.75rem 1.1rem;
+}
+
+.tabla-limpia td {
+    padding: 0.75rem 1.1rem;
+    vertical-align: middle;
+    border-bottom: 1px solid #f2f2f2;
+    font-family: "Roboto", sans-serif;
+}
+
+.tabla-limpia tr:last-child td {
+    border-bottom: none;
+}
+
+.barra-pago-neto {
+    background: var(--portal-color);
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+}
+
+
+.texto-portal { color: var(--portal-color); }
+
+.dot-estado {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #1fa855;
+    display: inline-block;
+}
+
+.badge-status {
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+}
+
+.badge-autorizada { background: #e6f6ec; color: #1fa855; }
+.badge-pendiente  { background: #fff3e0; color: #e08a00; }
+
+.fila-dato {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #f2f2f2;
+    font-size: 0.9rem;
+}
+
+.fila-dato:last-child { border-bottom: none; }
+.fila-dato span:first-child { color: #888888; font-size: 0.85rem; }
+.fila-dato span:last-child  { font-weight: 600; }
+
+.servicio-chip {
+    background: #f1f2f5;
+    border-radius: 8px;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.tabla-gris thead th {
+    background: #f1f2f5;
+    font-size: 0.75rem;
+    border-bottom: none;
+}
+
+.folio {
+    color: #9aa1af;
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.modal-dialog { max-width: 460px; }
+.modal-content { border-radius: 16px; border: none; }
+
+.resumen-dias {
+    background: #f1f2f5;
+    border-radius: 10px;
+    padding: 0.9rem 0.6rem;
+}
+
+.resumen-num {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--portal-color);
+}
+
+#btnSolicitar,
+#btnEnviar {
+    background: var(--portal-color);
+    border-color: var(--portal-color);
+}
+
+#btnEnviar:disabled { opacity: 0.5; }
+
+.fab-chat {
+    position: fixed;
+    right: 20px;
+    bottom: 24px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: var(--portal-color);
+    color: #fff;
+    font-size: 1.25rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 200;
+}
+.fila-resumen {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid #f2f2f2;
+    color: #777;
+}
+
+.fila-resumen:last-child { border-bottom: none; }
+.fila-resumen strong { color: #111; }
+
+.calendario {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+}
+
+.cal-semana {
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9aa1af;
+    padding: 0.4rem 0;
+}
+
+.dia {
+    border: none;
+    border-radius: 6px;
+    height: 32px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.8rem;
+    cursor: pointer;
+}
+
+.dia.activo {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #333;
+}
+
+.tipo-asistencia  { background: #2b4bd6; }
+.tipo-descanso    { background: #9aa3b5; }
+.tipo-festivo     { background: #fbbf24; }
+.tipo-vacaciones  { background: #10b981; }
+.tipo-incapacidad { background: #f4525f; }
+.tipo-ausentismo  { background: #f97316; }
+.tipo-permiso     { background: #a78bfa; }
+
+.dia.tipo-futuro {
+    background: #f1f2f5;
+    color: #b0b5c0;
+    font-weight: 600;
+}
+
+.detalle-dia {
+    background: #f1f2f5;
+    border: 1px solid #e6e8ee;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+}
+
+#btnConsultar {
+    background: var(--portal-color);
+    border-color: var(--portal-color);
+}
+
+.btn-descargar {
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+.tabla-docs tbody tr:hover .btn-descargar,
+.btn-descargar:focus-visible {
+    opacity: 1;
+}
+
+@media (hover: none) {
+    .btn-descargar { opacity: 1; }
+}
+
+
+.tabla-docs td {
+    padding: 1rem 1.1rem;
+}
+
+.tabla-docs tbody tr:hover {
+    background: #f7f8fa;
+}
+
+.tag-doc {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+}
+
+.tag-nomina       { background: #e3ecff; color: #1d4ed8; }
+.tag-contrato     { background: #eef0f4; color: #555; }
+.tag-imss         { background: #e6f6ec; color: #1fa855; }
+.tag-constancia   { background: #f3e8ff; color: #9333ea; }
+.tag-legal        { background: #fff3e0; color: #e08a00; }
+.tag-capacitacion { background: #dff5f5; color: #0f9aa0; }
+
+.btn-descargar {
+    --bs-btn-color: var(--portal-color);
+    --bs-btn-border-color: var(--portal-color);
+    --bs-btn-hover-bg: var(--portal-color);
+    --bs-btn-hover-border-color: var(--portal-color);
+    --bs-btn-hover-color: #fff;
+    --bs-btn-active-bg: var(--portal-color);
+    --bs-btn-active-border-color: var(--portal-color);
+}
+
+.nivel-card {
+    background: var(--portal-color);
+    color: #fff;
+    border-radius: 12px;
+    padding: 1.75rem;
+}
+
+.nivel-card small {
+    opacity: 0.8;
+}
+
+.nivel-titulo {
+    font-size: 2rem;
+    margin: 0.25rem 0;
+}
+
+.progreso-nivel {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.progreso-nivel .progress-bar {
+    background: #fff;
+}
+
+.nivel-linea {
+    border-color: rgba(255, 255, 255, 0.4);
+    opacity: 1;
+    margin: 1.5rem 0 1rem;
+}
+
+.total-puntos {
+    background: #f1f2f5;
+}
+
+.forma-card {
+    background: #f1f2f5;
+    border: 1px solid #e6e8ee;
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+}
+
+.card-stat .stat-value.stat-grande { font-size: 2rem; }
+
+.texto-verde   { color: #1fa855; }
+.texto-naranja { color: #e08a00; }
+
+.btn-responder {
+    --bs-btn-bg: var(--portal-color);
+    --bs-btn-border-color: var(--portal-color);
+    --bs-btn-hover-bg: var(--portal-color);
+    --bs-btn-hover-border-color: var(--portal-color);
+    --bs-btn-active-bg: var(--portal-color);
+    --bs-btn-active-border-color: var(--portal-color);
+    font-weight: 500;
+}
+
+.btn-responder:hover { filter: brightness(0.92); }
+
+
+.banner-cumple {
+    background: var(--portal-color);
+    color: #fff;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.banner-cumple small,
+.banner-sub {
+    opacity: 0.8;
+}
+
+.avatar-lg { width: 44px; height: 44px; font-size: 0.95rem; }
+.avatar-sm { width: 32px; height: 32px; font-size: 0.8rem; }
+
+.pill-dias {
+    background: #eaf0ff;
+    color: #6b7a99;
+    font-size: 0.8rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+}
+
+.enlace-portal {
+    color: var(--portal-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.enlace-portal:hover { color: var(--portal-color); text-decoration: underline; }
+
+.tag-evento             { background: #e3ecff; color: #1d4ed8; }
+.tag-comunicado         { background: #e6f6ec; color: #1fa855; }
+.tag-reconocimiento     { background: #fff3e0; color: #e08a00; }
+.tag-capacitacion-rosa  { background: #fde8ef; color: #e0338c; }
+.tag-beneficio          { background: #f3e8ff; color: #9333ea; }
+
+.btn-portal {
+    --bs-btn-bg: var(--portal-color);
+    --bs-btn-border-color: var(--portal-color);
+    --bs-btn-hover-bg: var(--portal-color);
+    --bs-btn-hover-border-color: var(--portal-color);
+    --bs-btn-active-bg: var(--portal-color);
+    --bs-btn-active-border-color: var(--portal-color);
+    --bs-btn-disabled-bg: var(--portal-color);
+    --bs-btn-disabled-border-color: var(--portal-color);
+}
+
+.btn-portal:hover { filter: brightness(0.92); }
+
+.segmentado {
+    display: inline-flex;
+    background: #eef0f4;
+    border: 1px solid #e6e8ee;
+    border-radius: 8px;
+    padding: 3px;
+}
+
+.segmentado button {
+    border: none;
+    background: transparent;
+    color: #9aa1af;
+    font-size: 0.85rem;
+    font-weight: 500;
+    padding: 0.35rem 0.9rem;
+    border-radius: 6px;
+}
+
+.segmentado button.activo {
+    background: #fff;
+    color: #111;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.familiar-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.familiar-item:hover { border-color: #d5dbe8; }
+
+.familiar-item.activo {
+    border-color: var(--portal-color);
+    background: #eaf0ff;
+}
+
+.pill-benef {
+    background: #eaf0ff;
+    color: var(--portal-color);
+    font-size: 0.8rem;
+    padding: 0.2rem 0.7rem;
+    border-radius: 20px;
+}
+
+.avatar-xl { width: 52px; height: 52px; font-size: 1.1rem; }
+
+.dato-flag {
+    background: #f1f2f5;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+}
+
+.aviso-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.dot-azul    { background: #2b4bd6; }
+.dot-verde   { background: #1fa855; }
+.dot-naranja { background: #e08a00; }
+
+.tag-aviso-azul    { background: #e3ecff; color: #1d4ed8; }
+.tag-aviso-verde   { background: #e6f6ec; color: #1fa855; }
+.tag-aviso-naranja { background: #fff3e0; color: #e08a00; }

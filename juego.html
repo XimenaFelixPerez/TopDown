@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <title>Kiosco | Zona de Juego</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./color.js"></script>
+</head>
+<body>
+        <div class="sidebar d-flex flex-column justify-content-between p-3">
+        <div>
+            <div class="mb-4">
+                <h5 class="fw-bold text-primary mb-0" style="color: var(--portal-color) !important;">Kiosco</h5>
+                <small class="text-secondary">Portal del empleado</small>
+            </div>
+            <nav class="nav nav-pills flex-column gap-1">
+                <a class="nav-link" href="Dashboard.html"><i class="bi bi-grid"></i>Inicio</a>
+                <a class="nav-link" href="Nomina.html"><i class="bi bi-file-earmark-text"></i>Mi Nomina</a>
+                <a class="nav-link" href="prestaciones.html"><i class="bi bi-star"></i>Prestaciones</a>
+                <a class="nav-link" href="asistencia.html"><i class="bi bi-clock"></i>Asistencia</a>
+                <a class="nav-link" href="documentos.html"><i class="bi bi-file-earmark"></i>Documentos</a>
+                <a class="nav-link" href="desempeño.html"><i class="bi bi-graph-up"></i>Mi Desempeno</a>
+                <a class="nav-link" href="comunidad.html"><i class="bi bi-people"></i>Comunidad</a>
+                <a class="nav-link" href="familiares.html"><i class="bi bi-people-fill"></i>Familiares</a>
+                <a class="nav-link" href="perfil.html"><i class="bi bi-person"></i>Mi Perfil</a>
+                <a class="nav-link active" href="juego.html"><i class="bi bi-controller"></i>Zona de Juego</a>
+            </nav>
+        </div>
+
+        <div>
+            <div class="mb-3">
+                <small class="text-secondary d-block mb-2">Color del portal</small>
+                <div class="d-flex gap-2">
+                    <span class="color-dot" data-color="#2b4bd6" style="background:#2b4bd6;"></span>
+                    <span class="color-dot" data-color="#1e9e58" style="background:#1e9e58;"></span>
+                    <span class="color-dot" data-color="#d6336c" style="background:#d6336c;"></span>
+                    <span class="color-dot" data-color="#e8890c" style="background:#e8890c;"></span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+                <div class="avatar-circle">CM</div>
+                <div>
+                    <div class="fw-semibold small">Carlos Mendoza</div>
+                    <div class="text-secondary" style="font-size: 0.75rem;">Emp. 00124</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="topbar d-flex justify-content-between align-items-center px-4 py-3">
+            <h5 class="mb-0 fw-semibold">Zona de Juego</h5>
+            <div class="d-flex align-items-center gap-3">
+                <button id="botonTema" class="btn btn-sm btn-light border-0" title="Cambiar tema">
+                    <i class="bi bi-moon"></i>
+                </button>
+                <div class="position-relative">
+                    <i class="bi bi-bell"></i>
+                    <span class="notif-dot"></span>
+                </div>
+                <a href="login.html" class="text-decoration-none text-secondary small">Cerrar sesion</a>
+            </div>
+        </div>
+
+        <div class="p-4">
+
+<h4 class="fw-bold mb-4">Zona de Juego</h4>
+
+<div class="row g-4">
+    <div class="col-lg-8">
+        <div class="panel">
+            <div class="controlador-juego mb-3">
+                <div>
+                    <div class="fw-semibold mb-1">JUEGO UNITY</div>
+                    <small></small>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <div class="fw-bold">Kiosco </div>
+                    <div class="text-secondary small">Minijuego de la comunidad Eslabon</div>
+                </div>
+                <button class="btn text-white" style="background: var(--portal-color);">Jugar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="panel mb-3">
+            <span class="fw-semibold d-block mb-2">Tu progreso</span>
+            <small class="text-secondary">Mejor tiempo</small>
+            <div class="fw-bold numero" style="color: var(--portal-color);">1:24.30</div>
+            <small class="text-secondary">Partidas jugadas</small>
+            <div class="fw-bold numero">12</div>
+        </div>
+        <div class="panel">
+            <span class="fw-semibold d-block mb-2">Como jugar</span>
+            <ul class="text-secondary small mb-0 ps-3">
+                <li>....</li>
+                <li>....</li>
+                <li>....</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
