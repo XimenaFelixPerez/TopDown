@@ -20,3 +20,19 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", async function () {
+    var menu = document.querySelector(".sidebar .nav");
+    if (!menu) return;
+    try {
+        var r = await fetch("/api/admin/yo");
+        var datos = await r.json();
+        if (!datos.ok) return;
+    } catch (e) { return; }
+
+    var li = document.createElement("li");
+    li.className = "nav-item";
+    li.innerHTML = '<a href="admin.html" class="nav-link d-flex align-items-center gap-2">' +
+                   '<i class="bi bi-pencil-square"></i> Administrar</a>';
+    menu.appendChild(li);
+});

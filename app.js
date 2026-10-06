@@ -1,44 +1,21 @@
-// ---------- Color del portal ----------
-function aplicarColorPortal(color) {
-    document.documentElement.style.setProperty('--portal-color', color);
-    document.querySelectorAll('.color-dot').forEach(function (punto) {
-        punto.classList.toggle('active', punto.dataset.color === color);
-    });
-}
+import express from "express";
+import morgan from "morgan";
+import path from "path";
+import { fileURLToPath } from "url";
 
-function inicializarSelectorColor() {
-    var puntosColor = document.querySelectorAll('.color-dot');
-    var colorGuardado = localStorage.getItem('colorPortal');
-    if (colorGuardado) {
-        aplicarColorPortal(colorGuardado);
-    } else if (puntosColor.length) {
-        aplicarColorPortal(puntosColor[0].dataset.color);
-    }
-    puntosColor.forEach(function (punto) {
-        punto.addEventListener('click', function () {
-            var color = punto.dataset.color;
-            localStorage.setItem('colorPortal', color);
-            aplicarColorPortal(color);
-        });
-    });
-}
 
-function inicializarTema() {
-    var botonTema = document.getElementById('botonTema');
-    var temaGuardado = localStorage.getItem('temaPortal') || 'claro';
-    document.body.dataset.theme = temaGuardado === 'oscuro' ? 'dark' : 'light';
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const app = express();
 
-    if (!botonTema) return;
+app.use(morgan("dev"));
+app.use(express.json());
 
-    botonTema.addEventListener('click', function () {
-        var temaActual = document.body.dataset.theme === 'dark' ? 'oscuro' : 'claro';
-        var nuevoTema = temaActual === 'claro' ? 'oscuro' : 'claro';
-        document.body.dataset.theme = nuevoTema === 'oscuro' ? 'dark' : 'light';
-        localStorage.setItem('temaPortal', nuevoTema);
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function () {
-    inicializarSelectorColor();
-    inicializarTema();
+app.use("/paginas", express.static(path.join(__dirname, "paginas")));
+app.use("/scripts", express.static(path.join(__dirname, "scripts")));
+app.get("/style.css", (req, res) => {
+  res.sendFile(path.join(__dirname, "style.css"));
 });
+
+app.get("/", (req, res) => res.redirect("/paginas/index.html"));
+
+app.listen(3000, () => console.log("Servidor en http://localhost:3000"));

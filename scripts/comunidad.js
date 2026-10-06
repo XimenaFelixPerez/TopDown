@@ -17,7 +17,7 @@ const felicitaciones = [
     { de: "Carlos Mendoza", para: "Roberto Fuentes", cuando: "Hace 3 días", mensaje: "¡Felicidades Roberto! Espero que lo pases muy bien." },
 ];
 
-const noticias = [
+let noticias = [
     { tipo: "Evento", clase: "tag-evento", titulo: "Evento de integración Q3 — confirma tu asistencia", fecha: "01 Sep 2026", abierta: true,
       cuerpo: "El próximo 13 de septiembre realizaremos nuestro evento trimestral de integración en las instalaciones de Eslabón. Habrá dinámicas, comida y actividades de equipo. Confirma tu participación antes del 5 de septiembre." },
     { tipo: "Comunicado", clase: "tag-comunicado", titulo: "Nueva política de trabajo híbrido — vigente a partir de octubre", fecha: "28 Ago 2026", abierta: false,
@@ -30,7 +30,7 @@ const noticias = [
       cuerpo: "Los empleados con hijos en edad escolar pueden solicitar el apoyo de útiles. Entrega tu solicitud en Recursos Humanos." },
 ];
 
-const fechasEspeciales = [
+let fechasEspeciales = [
     { titulo: "Aniversario de la empresa", fecha: "15 Sep 2026", texto: "12 años de Desarrollo Eslabón. Celebramos juntos." },
     { titulo: "Día de la Independencia",   fecha: "16 Sep 2026", texto: "Día de descanso oficial. Que disfrutes el día." },
     { titulo: "Evento de integración Q3",  fecha: "13 Sep 2026", texto: "Evento presencial. Confirma tu asistencia antes del 5 de septiembre." },
@@ -121,7 +121,6 @@ function renderMuro() {
     });
 }
 renderMuro();
-
 const listaNoticias = document.getElementById("listaNoticias");
 
 function renderNoticias() {
@@ -129,36 +128,110 @@ function renderNoticias() {
     noticias.forEach((n) => {
         const card = document.createElement("div");
         card.className = "panel mb-3";
-        card.innerHTML = `
-            <div class="d-flex align-items-center gap-3">
-                <span class="tag-doc ${n.clase}">${n.tipo}</span>
-                <span class="fw-semibold flex-grow-1">${n.titulo}</span>
-                <small class="text-secondary numero text-nowrap">${n.fecha}</small>
-                <button class="btn btn-link btn-sm p-0 enlace-portal">${n.abierta ? "Cerrar" : "Leer"}</button>
-            </div>
-            ${n.abierta ? `<p class="text-secondary mt-3 mb-0">${n.cuerpo}</p>` : ""}
-        `;
-        card.querySelector("button").addEventListener("click", () => {
+
+        const fila = document.createElement("div");
+        fila.className = "d-flex align-items-center gap-3";
+
+        const tag = document.createElement("span");
+        tag.className = "tag-doc " + (n.clase || "tag-comunicado");
+        tag.textContent = n.tipo || "Noticia";
+
+        const titulo = document.createElement("span");
+        titulo.className = "fw-semibold flex-grow-1";
+        titulo.textContent = n.titulo;
+
+        const fecha = document.createElement("small");
+        fecha.className = "text-secondary numero text-nowrap";
+        fecha.textContent = n.fecha || "";
+
+        const boton = document.createElement("button");
+        boton.className = "btn btn-link btn-sm p-0 enlace-portal";
+        boton.textContent = n.abierta ? "Cerrar" : "Leer";
+        boton.addEventListener("click", () => {
             n.abierta = !n.abierta;
             renderNoticias();
         });
+
+        fila.append(tag, titulo, fecha, boton);
+        card.appendChild(fila);
+
+        if (n.abierta) {
+            const cuerpo = document.createElement("p");
+            cuerpo.className = "text-secondary mt-3 mb-0";
+            cuerpo.textContent = n.cuerpo;
+            card.appendChild(cuerpo);
+        }
         listaNoticias.appendChild(card);
     });
 }
 renderNoticias();
 
 const listaFechas = document.getElementById("listaFechas");
-fechasEspeciales.forEach((f) => {
-    const col = document.createElement("div");
-    col.className = "col-md-6";
-    col.innerHTML = `
-        <div class="panel h-100">
-            <div class="d-flex justify-content-between align-items-center mb-2">
-                <span class="fw-semibold">${f.titulo}</span>
-                <span class="event-date numero">${f.fecha}</span>
-            </div>
-            <div class="text-secondary">${f.texto}</div>
-        </div>
-    `;
-    listaFechas.appendChild(col);
-});
+
+function renderFechas() {
+    listaFechas.innerHTML = "";
+    fechasEspeciales.forEach((f) => {
+        const col = document.createElement("div");
+        col.className = "col-md-6";
+
+        const panel = document.createElement("div");
+        panel.className = "panel h-100";
+
+        const cab = document.createElement("div");
+        cab.className = "d-flex justify-content-between align-items-center mb-2";
+        const t = document.createElement("span");
+        t.className = "fw-semibold";
+        t.textContent = f.titulo;
+        const d = document.createElement("span");
+        d.className = "event-date numero";
+        d.textContent = f.fecha || "";
+        cab.append(t, d);
+
+        const texto = document.createElement("div");
+        texto.className = "text-secondary";
+        texto.textContent = f.texto;
+
+        panel.append(cab, texto);
+        col.appendChild(panel);
+        listaFechas.appendChild(col);
+    });
+}
+renderFechas();
+
+function fechaBonita(iso) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || "")) return iso || "";
+    const [a, m, d] = iso.split("-");
+    const meses = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
+    return `${d} ${meses[Number(m) - 1]} ${a}`;
+}
+
+(async function cargarDelServidor() {
+    try {
+        const resp = await fetch("/api/contenido");
+        if (!resp.ok) return;
+        const datos = await resp.json();
+
+        if (Array.isArray(datos.noticias) && datos.noticias.length) {
+            noticias = datos.noticias.map((n, i) => ({
+                tipo: "Noticia",
+                clase: "tag-comunicado",
+                titulo: n.titulo,
+                fecha: fechaBonita(n.fecha),
+                abierta: i === 0,
+                cuerpo: n.descripcion || "",
+            }));
+            renderNoticias();
+        }
+
+        if (Array.isArray(datos.eventos) && datos.eventos.length) {
+            fechasEspeciales = datos.eventos.map((e) => ({
+                titulo: e.titulo,
+                fecha: fechaBonita(e.fecha),
+                texto: [e.descripcion, e.lugar ? "Lugar: " + e.lugar : ""].filter(Boolean).join(" · "),
+            }));
+            renderFechas();
+        }
+    } catch (e) {
+
+    }
+})();
