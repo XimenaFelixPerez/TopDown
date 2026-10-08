@@ -1,46 +1,55 @@
+const loginView = document.getElementById('loginView');
+const verifyView = document.getElementById('verifyView');
+const loginForm = document.getElementById('loginForm');
+const verifyForm = document.getElementById('verifyForm');
+const loginError = document.getElementById('loginError');
+const verifyError = document.getElementById('verifyError');
+const codeSentTo = document.getElementById('codeSentTo');
 
-const VALID_EMPLOYEE_NUMBER = "00124@empleado.com";
-const VALID_PASSWORD = "12345678";
+const post = async (url, body) => {
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return { ok: r.ok, data: await r.json() };
+};
 
-const loginView = document.getElementById("loginView");
-const verifyView = document.getElementById("verifyView");
-
-const loginForm = document.getElementById("loginForm");
-const employeeNumber = document.getElementById("employeeNumber");
-const password = document.getElementById("password");
-const loginError = document.getElementById("loginError");
-
-const verifyForm = document.getElementById("verifyForm");
-const verificationCode = document.getElementById("verificationCode");
-const backToLogin = document.getElementById("backToLogin");
-
-loginForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const numero = employeeNumber.value.trim();
-    const contrasena = password.value.trim();
-
-    if (numero === VALID_EMPLOYEE_NUMBER && contrasena === VALID_PASSWORD) {
-        loginError.classList.add("d-none");
-        loginView.classList.add("d-none");
-        verifyView.classList.remove("d-none");
-    } else {
-        loginError.classList.remove("d-none");
-    }
+loginForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  loginError.classList.add('d-none');
+  const { ok, data } = await post('/api/login', {
+    correo: document.getElementById('employeeNumber').value.trim(),
+    contrasena: document.getElementById('password').value
+  });
+  if (!ok) {
+    loginError.textContent = data.mensaje;
+    loginError.classList.remove('d-none');
+    return;
+  }
+  codeSentTo.textContent = `Código enviado a ${data.correo}`;
+  loginView.classList.add('d-none');
+  verifyView.classList.remove('d-none');
 });
 
-verifyForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const codigo = verificationCode.value.trim();
-
-
-    console.log("Verificando codigo:", codigo);
-    window.location.href = "./dashboard.html";
+verifyForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  verifyError.classList.add('d-none');
+  const { ok, data } = await post('/api/verificar', {
+    codigo: document.getElementById('verificationCode').value.trim()
+  });
+  if (!ok) {
+    verifyError.textContent = data.mensaje;
+    verifyError.classList.remove('d-none');
+    return;
+  }
+  window.location.href = data.redirect;
 });
 
-backToLogin.addEventListener("click", (e) => {
-    e.preventDefault();
-    verifyView.classList.add("d-none");
-    loginView.classList.remove("d-none");
+document.getElementById('backToLogin').addEventListener('click', (e) => {
+  e.preventDefault();
+  verifyForm.reset();
+  verifyError.classList.add('d-none');
+  verifyView.classList.add('d-none');
+  loginView.classList.remove('d-none');
 });

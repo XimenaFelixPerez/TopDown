@@ -1,3 +1,22 @@
+(async function cargarDelServidor() {
+    try {
+        const lista = await api('/noticias');
+
+        if (Array.isArray(lista) && lista.length) {
+            noticias = lista.map((n, i) => ({
+                tipo: "Noticia",
+                clase: "tag-comunicado",
+                titulo: n.titulo,
+                fecha: fechaBonita(String(n.fecha || "").slice(0, 10)),
+                abierta: i === 0,
+                cuerpo: n.contenido || n.resumen || "",
+            }));
+            renderNoticias();
+        }
+    } catch (e) {
+        console.error("No se pudieron cargar las noticias:", e);
+    }
+})();
 
 const YO = "Carlos Mendoza";
 
@@ -70,7 +89,6 @@ btnEnviarFel.addEventListener("click", () => {
     });
     renderMuro();
     modalFel.hide();
-    bootstrap.Tab.getOrCreateInstance(document.querySelector('[data-bs-target="#tab-felicitaciones"]')).show();
 });
 
 document.getElementById("btnNuevaFel").addEventListener("click", () => abrirFelicitar());
@@ -111,9 +129,9 @@ function renderMuro() {
         card.className = "panel mb-3";
         card.innerHTML = `
             <div class="d-flex align-items-center gap-2 mb-2">
-                <div class="avatar-circle avatar-sm">${f.de[0]}</div>
-                <span class="small fw-semibold">${f.de} → ${f.para}</span>
-                <small class="text-secondary">· ${f.cuando}</small>
+                <div class="avatar-circle avatar-sm">${esc(f.de[0])}</div>
+                <span class="small fw-semibold">${esc(f.de)} → ${esc(f.para)}</span>
+                <small class="text-secondary">· ${esc(f.cuando)}</small>
             </div>
             <div class="text-secondary">${esc(f.mensaje)}</div>
         `;
@@ -207,31 +225,20 @@ function fechaBonita(iso) {
 
 (async function cargarDelServidor() {
     try {
-        const resp = await fetch("/api/contenido");
-        if (!resp.ok) return;
-        const datos = await resp.json();
+        const lista = await api('/noticias');
 
-        if (Array.isArray(datos.noticias) && datos.noticias.length) {
-            noticias = datos.noticias.map((n, i) => ({
+        if (Array.isArray(lista) && lista.length) {
+            noticias = lista.map((n, i) => ({
                 tipo: "Noticia",
                 clase: "tag-comunicado",
                 titulo: n.titulo,
-                fecha: fechaBonita(n.fecha),
+                fecha: fechaBonita(String(n.fecha || "").slice(0, 10)),
                 abierta: i === 0,
-                cuerpo: n.descripcion || "",
+                cuerpo: n.contenido || n.resumen || "",
             }));
             renderNoticias();
         }
-
-        if (Array.isArray(datos.eventos) && datos.eventos.length) {
-            fechasEspeciales = datos.eventos.map((e) => ({
-                titulo: e.titulo,
-                fecha: fechaBonita(e.fecha),
-                texto: [e.descripcion, e.lugar ? "Lugar: " + e.lugar : ""].filter(Boolean).join(" · "),
-            }));
-            renderFechas();
-        }
     } catch (e) {
-
+        console.error("No se pudieron cargar las noticias:", e);
     }
 })();
