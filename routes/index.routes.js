@@ -6,4 +6,4 @@ router.get('/', (req, res) => {
     res.json({ mensaje: 'API funcionando' });
 });
 
-export default router;
+export default router;a
