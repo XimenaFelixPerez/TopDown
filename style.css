@@ -944,3 +944,101 @@ body {
 }
 .enc-card.hecha .enc-icono { background: #e6f6ec; color: #1fa855; }
 .enc-meta { font-size: 0.8rem; color: #9aa1af; }
+
+:where([data-bs-theme="dark"]) {
+    --kio-fondo: #14161a;
+    --kio-sup: #1e2127;
+    --kio-sup2: #2a2e36;
+    --kio-sup3: #343943;
+    --kio-borde: #2f343d;
+    --kio-texto: #b8bfcc;
+    --kio-suave: color-mix(in srgb, var(--portal-color) 22%, transparent);
+
+    .bg-light { background-color: var(--kio-sup2) !important; }
+    [style*="#e6e7e9"] { background-color: var(--kio-sup2) !important; }
+    .table-light {
+        --bs-table-bg: var(--kio-sup2);
+        --bs-table-color: var(--kio-texto);
+        --bs-table-border-color: var(--kio-borde);
+    }
+
+    .main-content { background-color: var(--kio-fondo); }
+    .sidebar { border-right-color: var(--kio-borde); }
+
+    .panel,
+    .card-stat:not(.card-stat-highlight),
+    .familiar-item,
+    .enc-card,
+    .notif-panel {
+        background-color: var(--kio-sup);
+        border-color: var(--kio-borde);
+    }
+
+    .btn-quick,
+    .resumen-dias,
+    .detalle-dia,
+    .total-puntos,
+    .forma-card,
+    .dato-flag,
+    .servicio-chip,
+    .tabla-gris thead th,
+    .opcion-doc,
+    .campos-auto,
+    .check-card,
+    .chip-parentesco,
+    .btn-editar,
+    .boton-header,
+    .segmentado,
+    .modal .form-control,
+    .modal .form-select,
+    .enc-opcion span,
+    .enc-escala span {
+        background-color: var(--kio-sup2);
+        border-color: var(--kio-borde);
+        color: var(--kio-texto);
+    }
+
+    .modal .form-control:focus,
+    .modal .form-select:focus { background-color: var(--kio-sup); }
+
+    .nav-pills .nav-link { color: var(--kio-texto); }
+    .nav-pills .nav-link.active { background-color: var(--kio-suave); }
+
+    .badge-new,
+    .event-date,
+    .pill-dias,
+    .pill-benef,
+    .enc-icono,
+    .familiar-item.activo,
+    .opcion-doc.activo,
+    .enc-opcion input:checked + span { background-color: var(--kio-suave); }
+
+    .btn-quick:hover,
+    .boton-header:hover,
+    .btn-editar:hover,
+    .enc-opcion:hover span,
+    .enc-escala label:hover span { background-color: var(--kio-sup3); }
+
+    .notif-item:hover,
+    .tabla-docs tbody tr:hover,
+    .fila-resaltada,
+    .dropzone:hover,
+    .dropzone.arrastrando { background-color: var(--kio-sup2); }
+
+    .notif-item,
+    .fila-dato,
+    .fila-resumen,
+    .tabla-limpia td,
+    .tabla-limpia thead th,
+    .kiosco-tabs { border-bottom-color: var(--kio-borde); }
+
+    .segmentado button.activo { background-color: var(--kio-sup3); color: #fff; }
+    .dia.tipo-futuro { background-color: var(--kio-sup2); color: #7b8291; }
+    .dia.activo { box-shadow: 0 0 0 2px var(--kio-sup), 0 0 0 4px #e9ecef; }
+    .color-dot.active { border-color: #fff; }
+    .fila-resumen strong { color: #f1f3f5; }
+    .text-dark { color: #e9ecef !important; }
+}
+
+
+.rn-firma { display: none; }

@@ -9,6 +9,7 @@
     <title>Kiosco | Inicio</title>
     <link rel="stylesheet" href="../style.css">
     <script src="../scripts/color.js"></script>
+    <script src="../scripts/notificaciones.js" defer></script>
 </head>
 <body>
     <div class="d-flex">
@@ -95,12 +96,13 @@
             <header class="d-flex justify-content-between align-items-center px-4 py-3 border-bottom">
                 <h5 class="mb-0 fw-semibold">Inicio</h5>
                 <div class="d-flex align-items-center gap-3">
-                    <i class="bi bi-moon fs-5"></i>
-                    <span class="position-relative">
-                        <i class="bi bi-bell fs-5"></i>
-                        <span class="notif-dot"></span>
+                    <i class="bi bi-moon fs-5" id="btnTema" role="button"></i>
+                    <span class="position-relative" id="notifWrap">
+                        <i class="bi bi-bell fs-5" id="btnNotif" role="button"></i>
+                        <span class="notif-dot d-none" id="notifDot"></span>
+                        <span class="notif-panel d-none" id="notifPanel"></span>
                     </span>
-                    <a href="index.html" class="text-secondary text-decoration-none small">Cerrar sesión</a>
+                    <a href="index.html" class="text-secondary text-decoration-none small" onclick="fetch('/api/logout', { method: 'POST' }).finally(() => location.href = 'index.html'); return false;">Cerrar sesión</a>
                 </div>
             </header>
 
@@ -145,19 +147,7 @@
                     <div class="col-md-7">
                         <div class="panel h-100">
                             <h6 class="fw-bold mb-3">Notificaciones recientes</h6>
-                            <ul class="list-unstyled notif-list">
-                                <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                                    <span><span class="dot dot-active"></span> Tu recibo de nómina de agosto ya está disponible</span>
-                                    <span class="badge-new">Nueva</span>
-                                </li>
-                                <li class="d-flex justify-content-between align-items-center py-2 border-bottom">
-                                    <span><span class="dot dot-active"></span> Tienes 2 encuestas pendientes por responder</span>
-                                    <span class="badge-new">Nueva</span>
-                                </li>
-                                <li class="d-flex justify-content-between align-items-center py-2">
-                                    <span class="text-secondary"><span class="dot dot-muted"></span> Tu solicitud de vacaciones fue autorizada</span>
-                                </li>
-                            </ul>
+                            <ul class="list-unstyled notif-list" id="listaNotif"></ul>
                         </div>
                     </div>
                     <div class="col-md-5">
@@ -197,6 +187,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../scripts/dashboard.js"></script>
+    
 </body>
 </html>

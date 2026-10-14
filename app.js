@@ -42,6 +42,8 @@ app.get("/style.css", (req, res) => {
   res.sendFile(path.join(__dirname, "style.css"));
 });
 
+app.use("/Game", express.static(path.join(__dirname, "Game")));
+
 app.get("/", (req, res) => res.redirect("/paginas/index.html"));
 
 app.listen(3000, () => console.log("Servidor en http://localhost:3000"));

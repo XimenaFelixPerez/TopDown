@@ -1,5 +1,34 @@
 const COLOR_KEY = "kiosco-color";
 const COLOR_DEFECTO = "#2b4bd6";
+const TEMA_KEY = "kiosco-tema";
+
+if (localStorage.getItem(TEMA_KEY) === "dark") {
+    document.documentElement.setAttribute("data-bs-theme", "dark");
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const btnTema = document.getElementById("btnTema");
+    if (!btnTema) return;
+    const html = document.documentElement;
+
+    const pintarIcono = () => {
+        const oscuro = html.getAttribute("data-bs-theme") === "dark";
+        btnTema.classList.toggle("bi-moon", !oscuro);
+        btnTema.classList.toggle("bi-sun", oscuro);
+    };
+
+    btnTema.addEventListener("click", () => {
+        const oscuro = html.getAttribute("data-bs-theme") !== "dark";
+        if (oscuro) html.setAttribute("data-bs-theme", "dark");
+        else html.removeAttribute("data-bs-theme");
+        localStorage.setItem(TEMA_KEY, oscuro ? "dark" : "light");
+        pintarIcono();
+    });
+
+    pintarIcono();
+});
+
+
 
 const colorGuardado = localStorage.getItem(COLOR_KEY) || COLOR_DEFECTO;
 document.documentElement.style.setProperty("--portal-color", colorGuardado);
